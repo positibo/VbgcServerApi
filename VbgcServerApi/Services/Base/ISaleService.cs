@@ -10,5 +10,6 @@ namespace VbgcServerApi.Services
 
         List<QuarterlySaleDto> GetQuarterlySales();
         List<MonthlySaleDto> GetMonthlySales();
+        List<DailySaleDto> GetDailySales(int franchiseId);
     }
 }

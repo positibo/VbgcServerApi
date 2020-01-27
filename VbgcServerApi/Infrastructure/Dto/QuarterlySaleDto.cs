@@ -2,7 +2,7 @@
 {
     public class QuarterlySaleDto
     {
-        public int Quarter { get; set; }
-        public decimal TotalSale { get; set; }
+        public string Quarter { get; set; }
+        public string TotalSale { get; set; }
     }
 }

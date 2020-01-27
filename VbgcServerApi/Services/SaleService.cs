@@ -56,7 +56,7 @@ namespace VbgcServerApi.Services
             return null;
         }
 
-        public List<QuarterlySaleDto> GetQuarterlySales(/*List<MonthlySaleDto> monthlySales*/)
+        public List<QuarterlySaleDto> GetQuarterlySales()
         {
             var monthlySales = GetMonthlySales();
 
@@ -72,9 +72,9 @@ namespace VbgcServerApi.Services
                 {
                     quarterlySales.Add(new QuarterlySaleDto
                     {
-                        Quarter = quarter++,
-                        TotalSale = total
-                    });
+                        Quarter = string.Format("{0}{1}", "Quarter", quarter++),
+                        TotalSale = string.Format("{0}", total)
+                    }); ;
                     total = 0M;
                 }
             }
@@ -82,7 +82,7 @@ namespace VbgcServerApi.Services
             return quarterlySales;
         }
 
-        public List<MonthlySaleDto> GetMonthlySales(/*List<DailySaleDto> dailySales*/)
+        public List<MonthlySaleDto> GetMonthlySales()
         {
             var dailySales = GetDailySales(1);
             var monthlySales = new List<MonthlySaleDto>();
@@ -92,7 +92,6 @@ namespace VbgcServerApi.Services
                 monthlySales.Add(new MonthlySaleDto
                 {
                     Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(m),
-                    //Sales = sales,
                     TotalSale = sales.Select(d => d.TotalSale).Sum()
                 });
             }
@@ -100,7 +99,7 @@ namespace VbgcServerApi.Services
             return monthlySales;
         }
 
-        private List<DailySaleDto> GetDailySales(int franchiseId)
+        public List<DailySaleDto> GetDailySales(int franchiseId)
         {
             var dailySales = new List<DailySaleDto>();
             var orders = context.Orders.Where(o => o.FranchiseId == franchiseId).ToList();
@@ -109,7 +108,12 @@ namespace VbgcServerApi.Services
                 foreach (var detail in order.OrderDetails)
                 {
                     var totalprice = detail.Game.Price * detail.Quantity;
-                    dailySales.Add(new DailySaleDto { TotalSale = totalprice, IssueDate = order.IssueDate });
+                    dailySales.Add(new DailySaleDto
+                    {
+                        TotalSale = totalprice,
+                        IssueDate = order.TransactionDate,
+                        DaySale = order.TransactionDate.ToString("MM/dd/yyyy")
+                    });
                 }
             }
 

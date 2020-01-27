@@ -25,6 +25,7 @@ namespace VbgcServerApi.Data
 		public DbSet<OrderDetail> OrderDetails { get; set; }
 		public DbSet<PlayerSize> PlayerSizes { get; set; }
 		public DbSet<Franchise> Franchises { get; set; }
+		public DbSet<OrderTransactionHistory> OrderTransactionHistories { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

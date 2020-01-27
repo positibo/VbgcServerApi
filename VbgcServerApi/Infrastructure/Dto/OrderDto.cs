@@ -8,11 +8,7 @@ namespace VbgcServerApi.Infrastructure.Dto
     {
         public int OrderId { get; set; }
 		[Required]
-		public DateTime IssueDate { get; set; }
-		[Required]
 		public bool IsDeliver { get; set; }
-		[Required]
-		public DateTime DeliveryDate { get; set; }
 		[Required]
 		[Range(1, int.MaxValue)]
 		public int CustomerId { get; set; }
@@ -21,11 +17,13 @@ namespace VbgcServerApi.Infrastructure.Dto
 		public string GameName { get; set; }
 		[Required]
 		[Range(1, int.MaxValue)]
-		public int TransactionStatusId { get; set; }
 		public int FranchiseId { get; set; }
-		public string TransactionStatus { get; set; }
 		public string ReferenceNumber { get; set; }
-		public virtual TransactionStatusDto DeliveryStatus { get; set; }
+		public DateTime TransactionDate { get; set; }
+		public bool EmailNotificationIsSent { get; set; }
+		public int TransactionStatusId { get; set; }
+		public string TransactionStatusName { get; set; }
+		//public TransactionStatusDto TransactionStatus { get; set; }
 		[Required]
 		public IEnumerable<OrderDetailDto> OrderDetails { get; set; }
 	}

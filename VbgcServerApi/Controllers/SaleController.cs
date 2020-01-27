@@ -44,5 +44,12 @@ namespace VbgcServerApi.Controllers
         {
             return Ok(saleService.GetMonthlySales());
         }
+
+        [Route("[action]/{id}")]
+        [HttpGet]
+        public ActionResult<DailySaleDto> GetDailySaleByFranchiseId(int id)
+        {
+            return Ok(saleService.GetDailySales(id));
+        }
     }
 }

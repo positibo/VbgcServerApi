@@ -28,6 +28,9 @@ namespace VbgcServerApi.Services
 				var customer = context.Customers.Find(order.CustomerId);
 				order.CustomerName = customer != null ? customer.CustomerName : string.Empty;
 
+				var transactionStatus = context.TransactionStatus.Find(order.TransactionStatusId);
+				order.TransactionStatusName = transactionStatus != null ? transactionStatus.TransactionStatusName : string.Empty;
+
 				// TODO: add all item orders.
 				var orderDetails = order.OrderDetails.ToList();
 				if (orderDetails != null && orderDetails.Count() > 0)
@@ -40,7 +43,11 @@ namespace VbgcServerApi.Services
 						OrderId = order.OrderId,
 						GameName = orderDetails[0].GameName,
 						Quantity = orderDetails[0].Quantity,
-						TransactionStatus = context.TransactionStatus.Find(order.TransactionStatusId).TransactionStatusName
+						TransactionStatusId = order.TransactionStatusId,
+						TransactionStatusName = order.TransactionStatusName,
+						//TransactionStatus = order.TransactionStatus,
+						FranchiseId = order.FranchiseId,
+						OrderDetails = order.OrderDetails
 					});
 				}
 			}
@@ -61,6 +68,9 @@ namespace VbgcServerApi.Services
 			var customer = context.Customers.Find(order.CustomerId);
 			order.CustomerName = customer != null ? customer.CustomerName : string.Empty;
 
+			var transactionStatus = context.TransactionStatus.Find(order.TransactionStatusId);
+			order.TransactionStatusName = transactionStatus != null ? transactionStatus.TransactionStatusName : string.Empty;
+
 			// TODO: add all item orders.
 			var orderDetails = order.OrderDetails.ToList();
 			if (orderDetails != null && orderDetails.Count() > 0)
@@ -68,11 +78,16 @@ namespace VbgcServerApi.Services
 				return new OrderDto
 				{
 					ReferenceNumber = order.ReferenceNumber,
+					CustomerId = order.CustomerId,
 					CustomerName = order.CustomerName,
 					OrderId = order.OrderId,
 					GameName = orderDetails[0].GameName,
 					Quantity = orderDetails[0].Quantity,
-					TransactionStatus = context.TransactionStatus.Find(order.TransactionStatusId).TransactionStatusName
+					TransactionStatusId = order.TransactionStatusId,
+					TransactionStatusName = order.TransactionStatusName,
+					//TransactionStatus = order.TransactionStatus,
+					FranchiseId = order.FranchiseId,
+					OrderDetails = order.OrderDetails
 				};
 			}
 

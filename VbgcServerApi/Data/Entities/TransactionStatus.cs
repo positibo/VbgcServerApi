@@ -11,6 +11,6 @@ namespace VbgcServerApi.Data.Entities
 		public int TransactionStatusId { get; set; }
 		[Required]
 		public string TransactionStatusName { get; set; }
-		public virtual ICollection<Order> Orders { get; set; }
+		//public virtual ICollection<Order> Orders { get; set; }
 	}
 }

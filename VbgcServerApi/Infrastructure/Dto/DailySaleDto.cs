@@ -6,5 +6,6 @@ namespace VbgcServerApi.Infrastructure.Dto
     {
         public decimal TotalSale { get; set; }
         public DateTime IssueDate { get; set; }
+        public string DaySale { get; set; }
     }
 }

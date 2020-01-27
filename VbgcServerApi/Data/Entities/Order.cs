@@ -11,11 +11,7 @@ namespace VbgcServerApi.Data.Entities
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int OrderId { get; set; }
 		[Required]
-		public DateTime IssueDate { get; set; }
-		[Required]
 		public bool IsDeliver { get; set; }
-		[Required]
-		public DateTime DeliveryDate { get; set; }
 		[Required]
 		public int CustomerId { get; set; }
 		public virtual Customer Customer { get; set; }
@@ -23,7 +19,9 @@ namespace VbgcServerApi.Data.Entities
 		public int TransactionStatusId { get; set; }
 		public int FranchiseId { get; set; }
 		public string ReferenceNumber { get; set; }
-		public virtual TransactionStatus DeliveryStatus { get; set; }
+		public DateTime TransactionDate { get; set; }
+		public bool EmailNotificationIsSent { get; set; }
+		public virtual TransactionStatus TransactionStatus { get; set; }
 		public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 	}
 }
